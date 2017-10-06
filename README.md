@@ -23,13 +23,15 @@ Understanding of Docker and containers
 
 # How to use the Images
 
-In order to use these images, it is necessary to accept the terms of the DataStax license. This is done by setting the environment variable `DS_LICENSE` to the value accept when running containers based on the produced images. To show the license included in the images, set the variable `DS_LICENSE` to the value `accept`. *The images will not start without the variable set to the accept value.*
+In order to use these images, it is necessary to accept the [terms](https://www.datastax.com/enterprise-terms) of the DataStax licenses. This is done by setting the environment variable `DS_LICENSE` to the value 'accept' when running containers based on the produced images. To show the license included in the images, set the variable `DS_LICENSE` to the value `accept`. *The images will not start without the variable set to the accept value.*
+
+```DS_LICENSE=accept```
 
 # Configuration
 
 DataStax has made it easy to make configuration changes by creating a script that looks in the exposed Volume `/mnt/conf` for any added configuration files and loads them at container start. 
 
-To take advantage of this feature, you will need to create a mount directory on your host, mount your local directory to the exposed Volume `/mnt/conf`, place you modified configuration files in the mount directory on your host machine and start the container. 
+To take advantage of this feature, you will need to create a mount directory on your host, mount your local directory to the exposed Volume `/mnt/conf`, place your modified configuration files in the mount directory on your host machine and start the container. 
 
 These files will override the existing configuration files.  The configs must contain all the values to be used along with using the dse naming convention such as cassandra.yaml, dse.yaml, opscenterd.conf 
 
@@ -50,8 +52,6 @@ Docker Run Switches | Description
 -d | Recommended: Starts the container in the background
 -p | Publish containers ports to the host<BR>Optional : for DSE<BR>Required: for Opscenter and Studio</BR>
 -v | Optional: Bind Mount a Volume
-
-These are the most commonly used `docker run` switches used in deploying DSE.  For a full list please see [docker run](https://docs.docker.com/engine/reference/commandline/run/) reference.
 
 
 DSE start switches | Description
@@ -108,7 +108,7 @@ This will expose the container's CQL client port (9042) on the host at port 9042
 
 # Environment Variables
 
-When you start the DSE image, you can adjust the configuration of the Cassandra instance by passing one or more environment variables on the `docker run` command line
+When you start the DSE image, you can adjust the configuration of the Cassandra instance by passing one or more environment variables on the `docker run` command line. This is helpful when you're getting started or making very few changes to the base configurations.
 
 ### LISTEN_ADDRESS 
 The IP address to listen for connections from other nodes. Defaults to the container's IP address.
@@ -247,7 +247,7 @@ The following volumes are created and exposed with the images:
 
 * `/var/lib/datastax-studio`: Studio Data
 
-To persist data it is recommended that you pre-create directories and map them via the Docker run command to.
+To persist data it is recommended that you pre-create directories and map them via the Docker run command.
 
 **DataStax recommends the following mounts be made**
 
